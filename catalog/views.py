@@ -29,11 +29,11 @@ class BookListView(generic.ListView):
     model = Book
     paginate_by = 10
 
-class BookDetailView(generic.ListView):
+class BookDetailView(generic.DetailView):
     model = Book
 
 class AuthorListView(generic.ListView):
     model = Author
 
-class AuthorDetailView(generic.ListView):
+class AuthorDetailView(generic.DetailView):
     model = Author

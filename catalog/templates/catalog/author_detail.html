@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Писатель: {{ author.first_name }}, {{ author.last_name }}</h1>
+
+  <p><strong>Дата рождения:</strong> {{ author.date_of_birth }}</p>
+  {% if author.date_of_die is None %}
+    <p><strong>Автор жив и пишет книги</strong></p>
+  {% else %}
+    <p><strong>Дата смерти:</strong> {{ author.date_of_die }}</p>
+  {% endif %}
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Книги, написанные автором</h4>
+
+    {% for copy in author.book_set.all %}
+    <hr>
+    <p><strong>Название книги:</strong> {{ copy.title }}</p>
+    <p><strong>Жанр:</strong> {% for genre in copy.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    {% endfor %}
+  </div>
+{% endblock %}
