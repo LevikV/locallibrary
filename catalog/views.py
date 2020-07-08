@@ -18,11 +18,16 @@ def index(request):
     num_genres = Genre.objects.count()
     num_custom_title = Book.objects.filter(title__icontains="Одиннадцать").count()
 
+    #Показ количества посещений пользователем главной страницы
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits +1
+
+
     #Отрисовка Html шаблона index.html с данными внутри
     return render(
         request,
         'index.html',
-        context={'num_books':num_books, 'num_instance':num_instance, 'num_instance_available':num_instance_available, 'num_authors':num_authors, 'num_genres':num_genres, 'num_custom_title':num_custom_title},
+        context={'num_books':num_books, 'num_instance':num_instance, 'num_instance_available':num_instance_available, 'num_authors':num_authors, 'num_genres':num_genres, 'num_custom_title':num_custom_title, 'num_visits':num_visits},
     )
 
 class BookListView(generic.ListView):
