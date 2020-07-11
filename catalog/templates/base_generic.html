@@ -29,6 +29,11 @@
           <li>Имя пользователя: {{ user.get_username }}</li>
           <li><a href="{% url 'my_borrowes'%}">Мои книги на прокате</a></li>
           <li><a href="{% url 'logout'%}?next={{request.path}}">Выйти</a></li>
+            {% if perms.catalog.can_mark_returned %}
+                <hr>
+                <li>Раздел для администрации</li>
+                <li><a href="{% url 'booksloans' %}">Список выданных книг</a></li>
+            {% endif %}
         {% else %}
           <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
         {% endif %}
